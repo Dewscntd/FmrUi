@@ -1,0 +1,43 @@
+<div class="user-list-container">
+  <h2>Users</h2>
+  <button nz-button nzType="primary" (click)="createUser()">Create User</button>
+
+  <nz-table nzBordered [nzData]="users">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th style="width: 150px;">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let user of users"
+        (click)="onRowClick(user.id)"
+        style="cursor: pointer;"
+      >
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>
+          <button 
+            nz-button 
+            nzSize="small" 
+            nzType="default" 
+            (click)="editUser(user); $event.stopPropagation()"
+          >
+            Edit
+          </button>
+          <button 
+            nz-button 
+            nzSize="small" 
+            nzType="default" 
+            nzDanger
+            (click)="deleteUser(user.id); $event.stopPropagation()"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

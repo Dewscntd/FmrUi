@@ -1,0 +1,8 @@
+<div>
+  <ng-container *ngIf="userName; else noUser">
+    <strong>Selected User:</strong> {{ userName }}
+  </ng-container>
+  <ng-template #noUser>
+    <em>No user selected</em>
+  </ng-template>
+</div>

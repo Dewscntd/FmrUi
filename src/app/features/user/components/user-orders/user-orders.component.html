@@ -1,0 +1,19 @@
+<div class="orders-container">
+  <h2>Orders</h2>
+
+  <p>Selected user ID: {{ (selectedUserId$ | async) ?? 'n/a' }}</p>
+
+  <user-name [userName]="(selectedUserSummary$ | async)?.user.name"></user-name>
+  <user-total [total]="(selectedUserSummary$ | async)?.sumOfOrders"></user-total>
+  
+  <div *ngIf="(selectedUserOrders$ | async) as orders">
+    <ul *ngIf="orders.length > 0; else noOrders">
+      <li *ngFor="let order of orders">
+        Order #{{ order.id }} => Total: {{ order.total }}
+      </li>
+    </ul>
+    <ng-template #noOrders>
+      <p>No orders for selected user.</p>
+    </ng-template>
+  </div>
+  

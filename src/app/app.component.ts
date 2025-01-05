@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+
+import { UserListComponent } from "./features/user/components/user-list/user-list.component";
+import { UserOrdersComponent } from "./features/user/components/user-orders/user-orders.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [
+    UserListComponent,
+    UserOrdersComponent
+],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  title = 'fmr-ui';
-}
+export class AppComponent {}
