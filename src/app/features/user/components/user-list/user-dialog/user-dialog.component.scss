@@ -1,0 +1,36 @@
+.user-dialog-container {
+    h2 {
+      margin-top: 0;
+    }
+  
+    .dialog-actions {
+      text-align: right;
+      margin-top: 16px;
+  
+      button {
+        margin-left: 8px;
+      }
+    }
+  
+    @media (max-width: 600px) {
+      h2 {
+        font-size: 1rem;
+      }
+      .dialog-actions {
+        text-align: center;
+      }
+    }
+  
+    @media (min-width: 601px) and (max-width: 1024px) {
+      .dialog-actions {
+        text-align: right;
+      }
+    }
+  
+    @media (min-width: 1025px) {
+      h2 {
+        font-size: 1.25rem;
+      }
+    }
+  }
+  

@@ -23,35 +23,8 @@ import { User } from '../../../../../core/domain/user/user.model';
     NzButtonModule
   ],
   selector: 'app-user-dialog',
-  template: `
-      <div>
-      <h2>{{ data?.id ? 'Edit User' : 'Create User' }}</h2>
-      <form nz-form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <div nz-form-item nz-row>
-          <div nz-form-label nz-col [nzSpan]="6">
-            <label>ID</label>
-          </div>
-          <div nz-form-control nz-col [nzSpan]="14">
-            <input nz-input type="number" formControlName="id" />
-          </div>
-        </div>
-
-        <div nz-form-item nz-row>
-          <div nz-form-label nz-col [nzSpan]="6">
-            <label>Name</label>
-          </div>
-          <div nz-form-control nz-col [nzSpan]="14">
-            <input nz-input type="text" formControlName="name" />
-          </div>
-        </div>
-
-        <div style="text-align: right; margin-top: 16px;">
-          <button nz-button nzType="default" (click)="onCancel()">Cancel</button>
-          <button nz-button nzType="primary" [disabled]="form.invalid" style="margin-left: 8px;">Save</button>
-        </div>
-      </form>
-    </div>
-  `,
+  templateUrl: `./user-dialog.component.html`,
+  styleUrl: './user-dialog.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
@@ -62,9 +35,9 @@ export class UserDialogComponent implements OnInit {
   
   form = this.fb.group({
     id: [0, Validators.required],
-    name: ['', Validators.required]
+    name: ['', Validators.required],
+    details: [''] 
   });
-
   constructor(@Inject(NZ_MODAL_DATA) public data: User | null) {}
 
   ngOnInit() {
@@ -77,9 +50,16 @@ export class UserDialogComponent implements OnInit {
   }
 
   onSubmit() {
-    const user = this.form.getRawValue() as User;
-    
-    this.modalRef.close(user);
+    if (this.form.valid) {
+      const raw = this.form.getRawValue();
+      
+      const user: User = {
+        id: raw.id,
+        name: raw.name,
+        details: raw.details 
+      } as User;
+      this.modalRef.close(user);
+    }
   }
 
   onCancel() {

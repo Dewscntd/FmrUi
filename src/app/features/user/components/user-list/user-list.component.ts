@@ -37,11 +37,10 @@ export class UserListComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(UserActions.loadUsers());
-    this.store.dispatch(OrderActions.loadOrders());
     
     this.store.select(selectAllUsers).subscribe(all => {
       this.users = all;
-      this.cdr.detectChanges();
+      this.cdr.markForCheck();
     });
   }
 
